@@ -1,14 +1,20 @@
-import sqlite3
+import psycopg2
+import os
 
-DB_NAME = "feedback.db"
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+
+def get_connection():
+    return psycopg2.connect(DATABASE_URL)
+
 
 def init_db():
-    conn = sqlite3.connect(DB_NAME)
+    conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS feedback (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id SERIAL PRIMARY KEY,
         disciplina TEXT,
         tipo TEXT,
         titolo TEXT,
@@ -16,7 +22,7 @@ def init_db():
         priorita TEXT,
         fonte TEXT,
         stato TEXT,
-        immagine TEXT
+        image_url TEXT
     )
     """)
 
@@ -24,26 +30,27 @@ def init_db():
     conn.close()
 
 
-def add_feedback(disciplina, tipo, titolo, descrizione, priorita, fonte, stato, immagine):
-    conn = sqlite3.connect(DB_NAME)
+def add_feedback(disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url):
+    conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
-        INSERT INTO feedback (disciplina, tipo, titolo, descrizione, priorita, fonte, stato, immagine)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    """, (disciplina, tipo, titolo, descrizione, priorita, fonte, stato, immagine))
+        INSERT INTO feedback (disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+    """, (disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url))
 
     conn.commit()
     conn.close()
 
 
 def get_all_feedback():
-    conn = sqlite3.connect(DB_NAME)
+    conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT id, disciplina, tipo, titolo, descrizione, priorita, fonte, stato, immagine
+        SELECT id, disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url
         FROM feedback
+        ORDER BY id DESC
     """)
 
     rows = cursor.fetchall()
@@ -52,12 +59,11 @@ def get_all_feedback():
     return rows
 
 
-
 def delete_feedback(feedback_id):
-    conn = sqlite3.connect(DB_NAME)
+    conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute("DELETE FROM feedback WHERE id = ?", (feedback_id,))
+    cursor.execute("DELETE FROM feedback WHERE id = %s", (feedback_id,))
 
     conn.commit()
     conn.close()

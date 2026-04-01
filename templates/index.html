@@ -80,6 +80,42 @@
 
     <h2 class="mb-3">Feedback salvati</h2>
 
+    <form method="get" class="row g-2 mb-4">
+
+        <div class="col-md-3">
+            <select name="tipo" class="form-select">
+                <option value="">Tutti i tipi</option>
+                <option value="Bug">Bug</option>
+                <option value="Miglioramento">Miglioramento</option>
+                <option value="Richiesta">Richiesta</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <select name="priorita" class="form-select">
+                <option value="">Tutte le priorità</option>
+                <option value="Alta">Alta</option>
+                <option value="Media">Media</option>
+                <option value="Bassa">Bassa</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <select name="stato" class="form-select">
+                <option value="">Tutti gli stati</option>
+                <option value="Nuovo">Nuovo</option>
+                <option value="In corso">In corso</option>
+                <option value="Risolto">Risolto</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 d-flex">
+            <button type="submit" class="btn btn-primary w-100 me-2">Filtra</button>
+            <a href="/" class="btn btn-outline-secondary w-100">Reset</a>
+        </div>
+
+    </form>
+
     {% for f in feedback %}
     <div class="card mb-3 shadow-sm">
         <div class="card-body">

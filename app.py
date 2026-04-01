@@ -1,10 +1,9 @@
 
-import sqlite3
 import cloudinary
 import cloudinary.uploader
 import os
 from flask import Flask, request, redirect, render_template
-from database import init_db, add_feedback, get_all_feedback, delete_feedback
+from database import init_db, add_feedback, get_all_feedback, delete_feedback, get_connection
 
 app = Flask(__name__)
 cloudinary.config(
@@ -70,11 +69,11 @@ def edit(feedback_id):
         file = request.files.get("image")
         remove_image = request.form.get("remove_image")
 
-        conn = sqlite3.connect("feedback.db")
+        conn = get_connection()
         cursor = conn.cursor()
 
         #recupero immagine attuale
-        cursor.execute("SELECT immagine FROM feedback WHERE id = ?", (feedback_id,))
+        cursor.execute("SELECT image_url FROM feedback WHERE id = %s", (feedback_id,))
         current_image = cursor.fetchone()[0]
 
         image_url = current_image
@@ -91,8 +90,8 @@ def edit(feedback_id):
         #update completo
         cursor.execute("""
             UPDATE feedback
-            SET disciplina=?, tipo=?, titolo=?, descrizione=?, priorita=?, fonte=?, stato=?, immagine=?
-            WHERE id=?
+            SET disciplina=%s, tipo=%s, titolo=%s, descrizione=%s, priorita=%s, fonte=%s, stato=%s, image_url=%s
+            WHERE id=%s
         """, (
             disciplina,
             tipo,
@@ -110,10 +109,10 @@ def edit(feedback_id):
 
         return redirect("/")
 
-    conn = sqlite3.connect("feedback.db")
+    conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM feedback WHERE id = ?", (feedback_id,))
+    cursor.execute("SELECT * FROM feedback WHERE id = %s", (feedback_id,))
     feedback = cursor.fetchone()
 
     conn.close()

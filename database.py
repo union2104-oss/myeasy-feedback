@@ -15,7 +15,8 @@ def init_db():
         descrizione TEXT,
         priorita TEXT,
         fonte TEXT,
-        stato TEXT
+        stato TEXT,
+        immagine TEXT
     )
     """)
 
@@ -23,14 +24,14 @@ def init_db():
     conn.close()
 
 
-def add_feedback(disciplina, tipo, titolo, descrizione, priorita, fonte, stato):
+def add_feedback(disciplina, tipo, titolo, descrizione, priorita, fonte, stato, immagine):
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
 
     cursor.execute("""
-        INSERT INTO feedback (disciplina, tipo, titolo, descrizione, priorita, fonte, stato)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-    """, (disciplina, tipo, titolo, descrizione, priorita, fonte, stato))
+        INSERT INTO feedback (disciplina, tipo, titolo, descrizione, priorita, fonte, stato, immagine)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """, (disciplina, tipo, titolo, descrizione, priorita, fonte, stato, immagine))
 
     conn.commit()
     conn.close()
@@ -41,7 +42,7 @@ def get_all_feedback():
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT id, disciplina, tipo, titolo, descrizione, priorita, fonte, stato
+        SELECT id, disciplina, tipo, titolo, descrizione, priorita, fonte, stato, immagine
         FROM feedback
     """)
 

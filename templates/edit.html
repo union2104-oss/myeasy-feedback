@@ -14,7 +14,8 @@
 
     <div class="card p-4 shadow-sm">
 
-        <form method="post">
+        <!-- ⚠️ enctype fondamentale -->
+        <form method="post" enctype="multipart/form-data">
 
             <div class="mb-3">
                 <label class="form-label">Disciplina</label>
@@ -62,6 +63,28 @@
                     <option {% if feedback[7]=='In corso' %}selected{% endif %}>In corso</option>
                     <option {% if feedback[7]=='Risolto' %}selected{% endif %}>Risolto</option>
                 </select>
+            </div>
+
+            <!-- 🔥 IMMAGINE ATTUALE -->
+            {% if feedback[8] %}
+            <div class="mb-3">
+                <label class="form-label">Immagine attuale</label><br>
+                <img src="{{ feedback[8] }}" class="img-fluid mb-2" style="max-width:300px;">
+
+                <!-- checkbox per rimuovere -->
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="remove_image" value="yes">
+                    <label class="form-check-label">
+                        Rimuovi immagine
+                    </label>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- 🔥 CARICA NUOVA IMMAGINE -->
+            <div class="mb-3">
+                <label class="form-label">Sostituisci immagine</label>
+                <input type="file" name="image" class="form-control">
             </div>
 
             <button type="submit" class="btn btn-success">Salva modifiche</button>

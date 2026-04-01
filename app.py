@@ -3,7 +3,7 @@ import cloudinary
 import cloudinary.uploader
 import os
 from flask import Flask, request, redirect, render_template
-from database import init_db, add_feedback, get_all_feedback, delete_feedback, get_connection
+from database import init_db, add_feedback, delete_feedback, get_connection
 
 app = Flask(__name__)
 cloudinary.config(
@@ -47,7 +47,39 @@ def home():
 
         return redirect("/")
 
-    feedback = get_all_feedback()
+    tipo = request.args.get("tipo")
+    priorita = request.args.get("priorita")
+    stato = request.args.get("stato")
+
+    query = """
+    SELECT id, disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url
+    FROM feedback
+    WHERE 1=1
+    """
+
+    params = []
+
+    if tipo:
+        query += " AND tipo = %s"
+        params.append(tipo)
+
+    if priorita:
+        query += " AND priorita = %s"
+        params.append(priorita)
+
+    if stato:
+        query += " AND stato = %s"
+        params.append(stato)
+
+    query += " ORDER BY id DESC"
+
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(query, params)
+
+    feedback = cursor.fetchall()
+
+    conn.close()
     return render_template("index.html", feedback=feedback)
 
 @app.route("/delete/<int:feedback_id>")

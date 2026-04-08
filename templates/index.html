@@ -29,9 +29,9 @@
             <div class="mb-3">
                 <label class="form-label">Tipo</label>
                 <select name="tipo" class="form-select">
-                    <option value="Bug" {% if request.args.get('tipo') == 'Bug' %}selected{% endif %}>Bug</option>
-                    <option value="Miglioramento" {% if request.args.get('tipo') == 'Miglioramento' %}selected{% endif %}>Miglioramento</option>
-                    <option value="Richiesta" {% if request.args.get('tipo') == 'Richiesta' %}selected{% endif %}>Richiesta</option>
+                    <option value="Bug">Bug</option>
+                    <option value="Miglioramento">Miglioramento</option>
+                    <option value="Richiesta">Richiesta</option>
                 </select>
             </div>
 
@@ -85,9 +85,9 @@
         <div class="col-md-3">
             <select name="tipo" class="form-select">
                 <option value="">Tutti i tipi</option>
-                <option value="Bug">Bug</option>
-                <option value="Miglioramento">Miglioramento</option>
-                <option value="Richiesta">Richiesta</option>
+                <option value="Bug" {% if request.args.get('tipo') == 'Bug' %}selected{% endif %}>Bug</option>
+                <option value="Miglioramento" {% if request.args.get('tipo') == 'Miglioramento' %}selected{% endif %}>Miglioramento</option>
+                <option value="Richiesta" {% if request.args.get('tipo') == 'Richiesta' %}selected{% endif %}>Richiesta</option>
             </select>
         </div>
 

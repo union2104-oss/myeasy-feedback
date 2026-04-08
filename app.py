@@ -50,6 +50,7 @@ def home():
     tipo = request.args.get("tipo")
     priorita = request.args.get("priorita")
     stato = request.args.get("stato")
+    fonte = request.args.get("fonte")
 
     query = """
     SELECT id, disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url
@@ -70,6 +71,10 @@ def home():
     if stato:
         query += " AND stato = %s"
         params.append(stato)
+
+    if fonte:
+        query += " AND fonte ILIKE %s"
+        params.append(f"%{fonte}%")
 
     query += " ORDER BY id DESC"
 

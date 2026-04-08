@@ -109,6 +109,14 @@
             </select>
         </div>
 
+        <div class="col-md-3">
+            <input type="text"
+                   name="fonte"
+                   class="form-control"
+                   placeholder="Cerca fonte..."
+                   value="{{ request.args.get('fonte', '') }}">
+        </div>
+
         <div class="col-md-3 d-flex">
             <button type="submit" class="btn btn-primary w-100 me-2">Filtra</button>
             <a href="/" class="btn btn-outline-secondary w-100">Reset</a>

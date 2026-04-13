@@ -80,3 +80,21 @@ def delete_feedback(feedback_id):
 
     conn.commit()
     conn.close()
+
+
+def get_images_for_feedback(feedback_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT image_url
+        FROM feedback_images
+        WHERE feedback_id = %s
+    """, (feedback_id,))
+
+    rows = cursor.fetchall()
+
+    conn.close()
+
+    # ritorna lista semplice di URL
+    return [row[0] for row in rows]

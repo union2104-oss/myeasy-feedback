@@ -166,7 +166,9 @@
                 {% for img in f["images"] %}
                     <img src="{{ img }}"
                          class="img-fluid mt-2 me-2"
-                         style="max-width:300px; cursor:pointer;">
+                         style="max-width:300px; cursor:pointer;"
+                         data-bs-toggle="modal"
+                         data-bs-target="#imageModal{{ f['id'] }}{{ loop.index }}">
                 {% endfor %}
 
                 <br>

@@ -26,6 +26,14 @@ def init_db():
     )
     """)
 
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS feedback_images (
+        id SERIAL PRIMARY KEY,
+        feedback_id INTEGER REFERENCES feedback(id) ON DELETE CASCADE,
+        image_url TEXT
+    )
+    """)
+
     conn.commit()
     conn.close()
 
@@ -37,10 +45,15 @@ def add_feedback(disciplina, tipo, titolo, descrizione, priorita, fonte, stato, 
     cursor.execute("""
         INSERT INTO feedback (disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        RETURNING id
     """, (disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url))
+
+    feedback_id = cursor.fetchone()[0]
 
     conn.commit()
     conn.close()
+
+    return feedback_id
 
 
 def get_all_feedback():

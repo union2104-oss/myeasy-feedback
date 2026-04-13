@@ -26,15 +26,16 @@ def home():
         fonte = request.form["fonte"]
         stato = request.form["stato"]
 
-        file = request.files.get("image")
+        files = request.files.getlist("image")
 
-        image_url = None
+        image_urls = []
 
-        if file and file.filename != "":
-            result = cloudinary.uploader.upload(file)
-            image_url = result["secure_url"]
+        for file in files:
+            if file and file.filename != "":
+                result = cloudinary.uploader.upload(file)
+                image_urls.append(result["secure_url"])
 
-        add_feedback(
+        feedback_id = add_feedback(
             disciplina,
             tipo,
             titolo,
@@ -42,8 +43,20 @@ def home():
             priorita,
             fonte,
             stato,
-            image_url
+            None
         )
+
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        for url in image_urls:
+            cursor.execute("""
+                INSERT INTO feedback_images (feedback_id, image_url)
+                VALUES (%s, %s)
+            """, (feedback_id, url))
+
+        conn.commit()
+        conn.close()
 
         return redirect("/")
 

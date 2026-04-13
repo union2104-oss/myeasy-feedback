@@ -27,10 +27,12 @@ def home():
         stato = request.form["stato"]
 
         files = request.files.getlist("image")
+        print("FILES:", files)
 
         image_urls = []
 
         for file in files:
+            print("FILES:", files)
             if file and file.filename != "":
                 result = cloudinary.uploader.upload(file)
                 image_urls.append(result["secure_url"])

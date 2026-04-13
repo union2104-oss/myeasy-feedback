@@ -125,79 +125,65 @@
     </form>
 
     {% for f in feedback %}
-    <div class="card mb-3 shadow-sm">
-        <div class="card-body">
+        <div class="card mb-3 shadow-sm">
+            <div class="card-body">
 
-            <h5 class="card-title">
-                {{ f[3] }}
-                <span class="badge bg-dark">{{ f[2] }}</span>
-            </h5>
+                <h5 class="card-title">
+                    {{ f["titolo"] }}
+                    <span class="badge bg-dark">{{ f["tipo"] }}</span>
+                </h5>
 
-            <p class="mb-1"><b>Disciplina:</b> {{ f[1] }}</p>
+                <p class="mb-1"><b>Disciplina:</b> {{ f["disciplina"] }}</p>
 
-            <p class="mb-1">
-                <b>Priorità:</b>
-                {% if f[5] == 'Alta' %}
-                    <span class="badge bg-danger">Alta</span>
-                {% elif f[5] == 'Media' %}
-                    <span class="badge bg-warning text-dark">Media</span>
-                {% else %}
-                    <span class="badge bg-success">Bassa</span>
-                {% endif %}
-            </p>
+                <p class="mb-1">
+                    <b>Priorità:</b>
+                    {% if f["priorita"] == 'Alta' %}
+                        <span class="badge bg-danger">Alta</span>
+                    {% elif f["priorita"] == 'Media' %}
+                        <span class="badge bg-warning text-dark">Media</span>
+                    {% else %}
+                        <span class="badge bg-success">Bassa</span>
+                    {% endif %}
+                </p>
 
-            <p class="mb-1">
-                <b>Stato:</b>
-                {% if f[7] == 'Nuovo' %}
-                    <span class="badge bg-secondary">Nuovo</span>
-                {% elif f[7] == 'In corso' %}
-                    <span class="badge bg-primary">In corso</span>
-                {% else %}
-                    <span class="badge bg-success">Risolto</span>
-                {% endif %}
-            </p>
+                <p class="mb-1">
+                    <b>Stato:</b>
+                    {% if f["stato"] == 'Nuovo' %}
+                        <span class="badge bg-secondary">Nuovo</span>
+                    {% elif f["stato"] == 'In corso' %}
+                        <span class="badge bg-primary">In corso</span>
+                    {% else %}
+                        <span class="badge bg-success">Risolto</span>
+                    {% endif %}
+                </p>
 
-            <p class="mb-1"><b>Fonte:</b> {{ f[6] }}</p>
+                <p class="mb-1"><b>Fonte:</b> {{ f["fonte"] }}</p>
 
-            <hr>
+                <hr>
 
-            <p style="white-space: pre-line;">{{ f[4] }}</p>
+                <p style="white-space: pre-line;">{{ f["descrizione"] }}</p>
 
-            {% if f[8] %}
-                <img src="{{ f[8] }}"
-                     class="img-fluid mt-2"
-                     style="max-width:300px; cursor:pointer;"
-                     data-bs-toggle="modal"
-                     data-bs-target="#imageModal{{ f[0] }}">
+                {% for img in f["images"] %}
+                    <img src="{{ img }}"
+                         class="img-fluid mt-2 me-2"
+                         style="max-width:300px; cursor:pointer;">
+                {% endfor %}
 
-                <div class="modal fade" id="imageModal{{ f[0] }}" tabindex="-1">
-                  <div class="modal-dialog modal-lg modal-dialog-centered">
-                    <div class="modal-content bg-dark">
+                <br>
 
-                      <div class="modal-body text-center">
-                        <img src="{{ f[8] }}" class="img-fluid">
-                      </div>
+                <a href="/delete/{{ f["id"] }}"
+                   class="btn btn-danger btn-sm mt-2"
+                   onclick="return confirm('Sei sicuro di voler eliminare questo feedback?')">
+                    Elimina
+                </a>
 
-                    </div>
-                  </div>
-                </div>
-            {% endif %}
+                <a href="/edit/{{ f["id"] }}" class="btn btn-warning btn-sm mt-2">
+                    Modifica
+                </a>
 
-            <br>
-
-            <a href="/delete/{{ f[0] }}"
-               class="btn btn-danger btn-sm mt-2"
-               onclick="return confirm('Sei sicuro di voler eliminare questo feedback?')">
-                Elimina
-            </a>
-
-            <a href="/edit/{{ f[0] }}" class="btn btn-warning btn-sm mt-2">
-                Modifica
-            </a>
-
+            </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
 
 </div>
 

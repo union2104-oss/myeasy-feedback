@@ -169,6 +169,18 @@
                          style="max-width:300px; cursor:pointer;"
                          data-bs-toggle="modal"
                          data-bs-target="#imageModal{{ f['id'] }}{{ loop.index }}">
+
+                    <div class="modal fade" id="imageModal{{ f['id'] }}{{ loop.index }}" tabindex="-1">
+                      <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content bg-dark">
+
+                          <div class="modal-body text-center">
+                            <img src="{{ img }}" class="img-fluid">
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
                 {% endfor %}
 
                 <br>

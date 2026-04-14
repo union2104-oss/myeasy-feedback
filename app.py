@@ -168,6 +168,16 @@ def edit(feedback_id):
             feedback_id
         ))
 
+        for file in files:
+            if file and file.filename != "":
+                result = cloudinary.uploader.upload(file)
+                new_image_url = result["secure_url"]
+
+                cursor.execute("""
+                    INSERT INTO feedback_images (feedback_id, image_url)
+                    VALUES (%s, %s)
+                """, (feedback_id, new_image_url))
+
         conn.commit()
         conn.close()
 

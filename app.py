@@ -168,6 +168,14 @@ def edit(feedback_id):
             feedback_id
         ))
 
+        images_to_delete = request.form.getlist("delete_images")
+
+        for img_url in images_to_delete:
+            cursor.execute("""
+                        DELETE FROM feedback_images
+                        WHERE feedback_id = %s AND image_url = %s
+                    """, (feedback_id, img_url))
+
         for file in files:
             if file and file.filename != "":
                 result = cloudinary.uploader.upload(file)

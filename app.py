@@ -135,7 +135,7 @@ def edit(feedback_id):
         fonte = request.form["fonte"]
         stato = request.form["stato"]
 
-        file = request.files.get("image")
+        files = request.files.getlist("image")
         remove_image = request.form.get("remove_image")
 
         conn = get_connection()
@@ -150,11 +150,6 @@ def edit(feedback_id):
         #se checkbox selezionata → rimuovi immagine
         if remove_image == "yes":
             image_url = None
-
-        #se carico nuova immagine → override
-        elif file and file.filename != "":
-            result = cloudinary.uploader.upload(file)
-            image_url = result["secure_url"]
 
         #update completo
         cursor.execute("""

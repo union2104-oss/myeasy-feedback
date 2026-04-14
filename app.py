@@ -186,7 +186,9 @@ def edit(feedback_id):
 
     conn.close()
 
-    return render_template("edit.html", feedback=feedback)
+    images = get_images_for_feedback(feedback_id)
+
+    return render_template("edit.html", feedback=feedback, images=images)
 
 
 if __name__ == "__main__":

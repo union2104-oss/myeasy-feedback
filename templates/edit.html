@@ -65,23 +65,17 @@
                 </select>
             </div>
 
-            <!-- 🔥 IMMAGINE ATTUALE -->
-            {% if feedback[8] %}
+            {% if images %}
             <div class="mb-3">
-                <label class="form-label">Immagine attuale</label><br>
-                <img src="{{ feedback[8] }}" class="img-fluid mb-2" style="max-width:300px;">
+                <label class="form-label">Immagini attuali</label><br>
 
-                <!-- checkbox per rimuovere -->
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="remove_image" value="yes">
-                    <label class="form-check-label">
-                        Rimuovi immagine
-                    </label>
-                </div>
+                {% for img in images %}
+                    <img src="{{ img }}" class="img-fluid mb-2 me-2" style="max-width:200px;">
+                {% endfor %}
+
             </div>
             {% endif %}
 
-            <!-- 🔥 CARICA NUOVA IMMAGINE -->
             <div class="mb-3">
                 <label class="form-label">Sostituisci immagine</label>
                 <input type="file" name="image" class="form-control">

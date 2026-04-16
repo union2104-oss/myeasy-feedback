@@ -20,49 +20,67 @@
             <div class="mb-3">
                 <label class="form-label">Discipline</label>
                 <input type="text" class="form-control" value="Quality" disabled>
-
                 <input type="hidden" name="disciplina" value="Quality">
+            </div>
+
+            <!-- PROJECT -->
+            <div class="mb-3">
+                <label class="form-label">Project</label>
+                <select name="project" class="form-select" required>
+
+                    <option value="079254C" {% if feedback["project"] == "079254C" %}selected{% endif %}>ASSIUT HYDROCRACKING COMPLEX (AHC)</option>
+                    <option value="204927C" {% if feedback["project"] == "204927C" %}selected{% endif %}>HVO Project</option>
+                    <option value="216097C" {% if feedback["project"] == "216097C" %}selected{% endif %}>BLUE POINT NUMBER ONE</option>
+                    <option value="2544" {% if feedback["project"] == "2544" %}selected{% endif %}>MIDOR REFINERY EXPANSION - ALEXANDRIA, EGYPT</option>
+                    <option value="082755C" {% if feedback["project"] == "082755C" %}selected{% endif %}>RDCG (Rotterdam Capacity Growth)</option>
+                    <option value="083118C" {% if feedback["project"] == "083118C" %}selected{% endif %}>B4 PROJECT - EPC PACKAGE 2 (ETHANE CRACKER)</option>
+                    <option value="072744C010" {% if feedback["project"] == "072744C010" %}selected{% endif %}>SGEXP - SINGAPORE EXPANSION PROJECT</option>
+                    <option value="215470C" {% if feedback["project"] == "215470C" %}selected{% endif %}>Coral Norte FLNG</option>
+                    <option value="215777C" {% if feedback["project"] == "215777C" %}selected{% endif %}>North Field South LNG</option>
+                    <option value="076551C" {% if feedback["project"] == "076551C" %}selected{% endif %}>BAPCO Modernization Program</option>
+
+                </select>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Type</label>
                 <select name="tipo" class="form-select">
-                    <option {% if feedback[2]=='Bug' %}selected{% endif %}>Bug</option>
-                    <option {% if feedback[2]=='Miglioramento' %}selected{% endif %}>Improvement</option>
-                    <option {% if feedback[2]=='Richiesta' %}selected{% endif %}>Request</option>
+                    <option value="Bug" {% if feedback["tipo"] == 'Bug' %}selected{% endif %}>Bug</option>
+                    <option value="Miglioramento" {% if feedback["tipo"] == 'Miglioramento' %}selected{% endif %}>Improvement</option>
+                    <option value="Richiesta" {% if feedback["tipo"] == 'Richiesta' %}selected{% endif %}>Request</option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Title</label>
-                <input type="text" name="titolo" class="form-control" value="{{ feedback[3] }}">
+                <input type="text" name="titolo" class="form-control" value="{{ feedback['titolo'] }}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Description</label>
-                <textarea name="descrizione" class="form-control" rows="5">{{ feedback[4] }}</textarea>
+                <textarea name="descrizione" class="form-control" rows="5">{{ feedback['descrizione'] }}</textarea>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Priority</label>
                 <select name="priorita" class="form-select">
-                    <option {% if feedback[5]=='Alta' %}selected{% endif %}>High</option>
-                    <option {% if feedback[5]=='Media' %}selected{% endif %}>Medium</option>
-                    <option {% if feedback[5]=='Bassa' %}selected{% endif %}>Low</option>
+                    <option value="Alta" {% if feedback["priorita"] == 'Alta' %}selected{% endif %}>High</option>
+                    <option value="Media" {% if feedback["priorita"] == 'Media' %}selected{% endif %}>Medium</option>
+                    <option value="Bassa" {% if feedback["priorita"] == 'Bassa' %}selected{% endif %}>Low</option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Source</label>
-                <input type="text" name="fonte" class="form-control" value="{{ feedback[6] }}">
+                <input type="text" name="fonte" class="form-control" value="{{ feedback['fonte'] }}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Status</label>
                 <select name="stato" class="form-select">
-                    <option {% if feedback[7]=='Nuovo' %}selected{% endif %}>New</option>
-                    <option {% if feedback[7]=='In corso' %}selected{% endif %}>In Progress</option>
-                    <option {% if feedback[7]=='Risolto' %}selected{% endif %}>Resolved</option>
+                    <option value="Nuovo" {% if feedback["stato"] == 'Nuovo' %}selected{% endif %}>New</option>
+                    <option value="In corso" {% if feedback["stato"] == 'In corso' %}selected{% endif %}>In Progress</option>
+                    <option value="Risolto" {% if feedback["stato"] == 'Risolto' %}selected{% endif %}>Resolved</option>
                 </select>
             </div>
 

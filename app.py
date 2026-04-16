@@ -196,8 +196,25 @@ def edit(feedback_id):
     conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM feedback WHERE id = %s", (feedback_id,))
-    feedback = cursor.fetchone()
+    cursor.execute("""
+        SELECT id, project, disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url
+        FROM feedback
+        WHERE id = %s
+    """, (feedback_id,))
+
+    f = cursor.fetchone()
+
+    feedback = {
+        "id": f[0],
+        "project": f[1],
+        "disciplina": f[2],
+        "tipo": f[3],
+        "titolo": f[4],
+        "descrizione": f[5],
+        "priorita": f[6],
+        "fonte": f[7],
+        "stato": f[8]
+    }
 
     conn.close()
 

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,99 +14,97 @@
     <h1 class="mb-4">MyEasy Feedback</h1>
 
     <div class="card p-4 shadow-sm mb-4">
-        <h4 class="mb-3">Inserisci Feedback</h4>
-
+        <h4 class="mb-3">Submit Feedback</h4>
 
         <form method="post" enctype="multipart/form-data">
 
             <div class="mb-3">
-                <label class="form-label">Disciplina</label>
+                <label class="form-label">Discipline</label>
                 <input type="text" class="form-control" value="Quality" disabled>
 
-                <!-- valore reale inviato -->
                 <input type="hidden" name="disciplina" value="Quality">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Tipo</label>
+                <label class="form-label">Type</label>
                 <select name="tipo" class="form-select">
                     <option value="Bug">Bug</option>
-                    <option value="Miglioramento">Miglioramento</option>
-                    <option value="Richiesta">Richiesta</option>
+                    <option value="Miglioramento">Improvement</option>
+                    <option value="Richiesta">Request</option>
                 </select>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Titolo</label>
+                <label class="form-label">Title</label>
                 <input type="text" name="titolo" class="form-control">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Descrizione</label>
+                <label class="form-label">Description</label>
                 <textarea name="descrizione" class="form-control" rows="5"></textarea>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Priorità</label>
+                <label class="form-label">Priority</label>
                 <select name="priorita" class="form-select">
-                    <option value="Alta">Alta</option>
-                    <option value="Media">Media</option>
-                    <option value="Bassa">Bassa</option>
+                    <option value="Alta">High</option>
+                    <option value="Media">Medium</option>
+                    <option value="Bassa">Low</option>
                 </select>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Fonte</label>
+                <label class="form-label">Source</label>
                 <input type="text" name="fonte" class="form-control">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Stato</label>
+                <label class="form-label">Status</label>
                 <select name="stato" class="form-select">
-                    <option value="Nuovo">Nuovo</option>
-                    <option value="In corso">In corso</option>
-                    <option value="Risolto">Risolto</option>
+                    <option value="Nuovo">New</option>
+                    <option value="In corso">In Progress</option>
+                    <option value="Risolto">Resolved</option>
                 </select>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Screenshot</label>
+                <label class="form-label">Screenshots</label>
                 <input type="file" name="image" class="form-control" multiple accept="image/*">
             </div>
 
-            <button type="submit" class="btn btn-primary">Invia</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
 
         </form>
     </div>
 
-    <h2 class="mb-3">Feedback salvati</h2>
+    <h2 class="mb-3">Saved Feedback</h2>
 
     <form method="get" class="row g-2 mb-4">
 
         <div class="col-md-3">
             <select name="tipo" class="form-select">
-                <option value="">Tutti i tipi</option>
+                <option value="">All types</option>
                 <option value="Bug" {% if request.args.get('tipo') == 'Bug' %}selected{% endif %}>Bug</option>
-                <option value="Miglioramento" {% if request.args.get('tipo') == 'Miglioramento' %}selected{% endif %}>Miglioramento</option>
-                <option value="Richiesta" {% if request.args.get('tipo') == 'Richiesta' %}selected{% endif %}>Richiesta</option>
+                <option value="Miglioramento" {% if request.args.get('tipo') == 'Miglioramento' %}selected{% endif %}>Improvement</option>
+                <option value="Richiesta" {% if request.args.get('tipo') == 'Richiesta' %}selected{% endif %}>Request</option>
             </select>
         </div>
 
         <div class="col-md-3">
             <select name="priorita" class="form-select">
-                <option value="">Tutte le priorità</option>
-                <option value="Alta" {% if request.args.get('priorita') == 'Alta' %}selected{% endif %}>Alta</option>
-                <option value="Media" {% if request.args.get('priorita') == 'Media' %}selected{% endif %}>Media</option>
-                <option value="Bassa" {% if request.args.get('priorita') == 'Bassa' %}selected{% endif %}>Bassa</option>
+                <option value="">All priorities</option>
+                <option value="Alta" {% if request.args.get('priorita') == 'Alta' %}selected{% endif %}>High</option>
+                <option value="Media" {% if request.args.get('priorita') == 'Media' %}selected{% endif %}>Medium</option>
+                <option value="Bassa" {% if request.args.get('priorita') == 'Bassa' %}selected{% endif %}>Low</option>
             </select>
         </div>
 
         <div class="col-md-3">
             <select name="stato" class="form-select">
-                <option value="">Tutti gli stati</option>
-                <option value="Nuovo" {% if request.args.get('stato') == 'Nuovo' %}selected{% endif %}>Nuovo</option>
-                <option value="In corso" {% if request.args.get('stato') == 'In corso' %}selected{% endif %}>In corso</option>
-                <option value="Risolto" {% if request.args.get('stato') == 'Risolto' %}selected{% endif %}>Risolto</option>
+                <option value="">All statuses</option>
+                <option value="Nuovo" {% if request.args.get('stato') == 'Nuovo' %}selected{% endif %}>New</option>
+                <option value="In corso" {% if request.args.get('stato') == 'In corso' %}selected{% endif %}>In Progress</option>
+                <option value="Risolto" {% if request.args.get('stato') == 'Risolto' %}selected{% endif %}>Resolved</option>
             </select>
         </div>
 
@@ -113,12 +112,12 @@
             <input type="text"
                    name="fonte"
                    class="form-control"
-                   placeholder="Cerca fonte..."
+                   placeholder="Search by source..."
                    value="{{ request.args.get('fonte', '') }}">
         </div>
 
         <div class="col-md-3 d-flex">
-            <button type="submit" class="btn btn-primary w-100 me-2">Filtra</button>
+            <button type="submit" class="btn btn-primary w-100 me-2">Filter</button>
             <a href="/" class="btn btn-outline-secondary w-100">Reset</a>
         </div>
 
@@ -130,34 +129,41 @@
 
                 <h5 class="card-title">
                     {{ f["titolo"] }}
-                    <span class="badge bg-dark">{{ f["tipo"] }}</span>
+
+                    {% if f["tipo"] == 'Bug' %}
+                        <span class="badge bg-dark">Bug</span>
+                    {% elif f["tipo"] == 'Miglioramento' %}
+                        <span class="badge bg-dark">Improvement</span>
+                    {% elif f["tipo"] == 'Richiesta' %}
+                        <span class="badge bg-dark">Request</span>
+                    {% endif %}
                 </h5>
 
-                <p class="mb-1"><b>Disciplina:</b> {{ f["disciplina"] }}</p>
+                <p class="mb-1"><b>Discipline:</b> {{ f["disciplina"] }}</p>
 
                 <p class="mb-1">
-                    <b>Priorità:</b>
+                    <b>Priority:</b>
                     {% if f["priorita"] == 'Alta' %}
-                        <span class="badge bg-danger">Alta</span>
+                        <span class="badge bg-danger">High</span>
                     {% elif f["priorita"] == 'Media' %}
-                        <span class="badge bg-warning text-dark">Media</span>
+                        <span class="badge bg-warning text-dark">Medium</span>
                     {% else %}
-                        <span class="badge bg-success">Bassa</span>
+                        <span class="badge bg-success">Low</span>
                     {% endif %}
                 </p>
 
                 <p class="mb-1">
-                    <b>Stato:</b>
+                    <b>Status:</b>
                     {% if f["stato"] == 'Nuovo' %}
-                        <span class="badge bg-secondary">Nuovo</span>
+                        <span class="badge bg-secondary">New</span>
                     {% elif f["stato"] == 'In corso' %}
-                        <span class="badge bg-primary">In corso</span>
+                        <span class="badge bg-primary">In Progress</span>
                     {% else %}
-                        <span class="badge bg-success">Risolto</span>
+                        <span class="badge bg-success">Resolved</span>
                     {% endif %}
                 </p>
 
-                <p class="mb-1"><b>Fonte:</b> {{ f["fonte"] }}</p>
+                <p class="mb-1"><b>Source:</b> {{ f["fonte"] }}</p>
 
                 <hr>
 
@@ -187,17 +193,17 @@
 
                 <a href="/delete/{{ f["id"] }}"
                    class="btn btn-danger btn-sm mt-2"
-                   onclick="return confirm('Sei sicuro di voler eliminare questo feedback?')">
-                    Elimina
+                   onclick="return confirm('Are you sure you want to delete this feedback?')">
+                    Delete
                 </a>
 
                 <a href="/edit/{{ f["id"] }}" class="btn btn-warning btn-sm mt-2">
-                    Modifica
+                    Edit
                 </a>
 
             </div>
         </div>
-        {% endfor %}
+    {% endfor %}
 
 </div>
 

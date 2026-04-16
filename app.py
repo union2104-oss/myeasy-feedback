@@ -40,7 +40,7 @@ def home():
         titolo = request.form["titolo"]
         descrizione = request.form["descrizione"]
         priorita = request.form["priorita"]
-        fonte = request.form["fonte"]
+        fonte = session["user_email"]
         stato = request.form["stato"]
 
         files = request.files.getlist("image")
@@ -152,7 +152,7 @@ def edit(feedback_id):
         titolo = request.form["titolo"]
         descrizione = request.form["descrizione"]
         priorita = request.form["priorita"]
-        fonte = request.form["fonte"]
+        fonte = session["user_email"]
         stato = request.form["stato"]
 
         files = request.files.getlist("image")

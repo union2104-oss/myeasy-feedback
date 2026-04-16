@@ -20,7 +20,7 @@ def login():
     if request.method == "POST":
         email = request.form["email"]
 
-        # controllo dominio
+        #controllo dominio
         if not email.endswith("@ten.com"):
             return render_template("login.html", error="Use your @ten.com email")
 
@@ -28,6 +28,11 @@ def login():
         return redirect("/")
 
     return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    session.pop("user_email", None)
+    return redirect("/login")
 
 @app.route("/", methods=["GET", "POST"])
 def home():

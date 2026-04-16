@@ -1,10 +1,11 @@
 import cloudinary
 import cloudinary.uploader
 import os
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, session
 from database import init_db, add_feedback, delete_feedback, get_connection, get_images_for_feedback
 
 app = Flask(__name__)
+app.secret_key = "super-secret-key"
 cloudinary.config(
     cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
     api_key=os.environ.get("CLOUDINARY_API_KEY"),
@@ -14,8 +15,24 @@ cloudinary.config(
 #inizializza il database
 init_db()
 
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        email = request.form["email"]
+
+        # controllo dominio
+        if not email.endswith("@ten.com"):
+            return render_template("login.html", error="Use your @ten.com email")
+
+        session["user_email"] = email
+        return redirect("/")
+
+    return render_template("login.html")
+
 @app.route("/", methods=["GET", "POST"])
 def home():
+    if "user_email" not in session:
+        return redirect("/login")
     if request.method == "POST":
         disciplina = request.form["disciplina"]
         project = request.form["project"]

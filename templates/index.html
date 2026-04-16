@@ -159,7 +159,31 @@
                 </h5>
 
                 <p class="mb-1"><b>Discipline:</b> {{ f["disciplina"] }}</p>
-                <p class="mb-1"><b>Project:</b> {{ f["project"] }}</p>
+                <p class="mb-1"><b>Project:</b>
+                    {% if f["project"] == "079254C" %}
+                        ASSIUT HYDROCRACKING COMPLEX (AHC)
+                    {% elif f["project"] == "204927C" %}
+                        HVO Project
+                    {% elif f["project"] == "216097C" %}
+                        BLUE POINT NUMBER ONE
+                    {% elif f["project"] == "2544" %}
+                        MIDOR REFINERY EXPANSION - ALEXANDRIA, EGYPT
+                    {% elif f["project"] == "082755C" %}
+                        RDCG (Rotterdam Capacity Growth)
+                    {% elif f["project"] == "083118C" %}
+                        B4 PROJECT - EPC PACKAGE 2 (ETHANE CRACKER)
+                    {% elif f["project"] == "072744C010" %}
+                        SGEXP - SINGAPORE EXPANSION PROJECT
+                    {% elif f["project"] == "215470C" %}
+                        Coral Norte FLNG
+                    {% elif f["project"] == "215777C" %}
+                        North Field South LNG
+                    {% elif f["project"] == "076551C" %}
+                        BAPCO Modernization Program
+                    {% else %}
+                        {{ f["project"] }}
+                    {% endif %}
+                </p>
 
                 <p class="mb-1">
                     <b>Priority:</b>

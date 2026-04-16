@@ -129,6 +129,7 @@ def delete(feedback_id):
 @app.route("/edit/<int:feedback_id>", methods=["GET", "POST"])
 def edit(feedback_id):
     if request.method == "POST":
+        project = request.form["project"]
         disciplina = request.form["disciplina"]
         tipo = request.form["tipo"]
         titolo = request.form["titolo"]
@@ -156,19 +157,20 @@ def edit(feedback_id):
         #update completo
         cursor.execute("""
             UPDATE feedback
-            SET disciplina=%s, tipo=%s, titolo=%s, descrizione=%s, priorita=%s, fonte=%s, stato=%s, image_url=%s
+            SET project=%s, disciplina=%s, tipo=%s, titolo=%s, descrizione=%s, priorita=%s, fonte=%s, stato=%s, image_url=%s
             WHERE id=%s
         """, (
-            disciplina,
-            tipo,
-            titolo,
-            descrizione,
-            priorita,
-            fonte,
-            stato,
-            image_url,
-            feedback_id
-        ))
+                project,
+                disciplina,
+                tipo,
+                titolo,
+                descrizione,
+                priorita,
+                fonte,
+                stato,
+                image_url,
+                feedback_id
+            ))
 
         images_to_delete = request.form.getlist("delete_images")
 

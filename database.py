@@ -15,6 +15,7 @@ def init_db():
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS feedback (
         id SERIAL PRIMARY KEY,
+        project TEXT,
         disciplina TEXT,
         tipo TEXT,
         titolo TEXT,
@@ -24,6 +25,11 @@ def init_db():
         stato TEXT,
         image_url TEXT
     )
+    """)
+
+    cursor.execute("""
+    ALTER TABLE feedback
+    ADD COLUMN IF NOT EXISTS project TEXT
     """)
 
     cursor.execute("""

@@ -19,6 +19,7 @@ init_db()
 def home():
     if request.method == "POST":
         disciplina = request.form["disciplina"]
+        project = request.form["project"]
         tipo = request.form["tipo"]
         titolo = request.form["titolo"]
         descrizione = request.form["descrizione"]
@@ -38,6 +39,7 @@ def home():
                 image_urls.append(result["secure_url"])
 
         feedback_id = add_feedback(
+            project,
             disciplina,
             tipo,
             titolo,

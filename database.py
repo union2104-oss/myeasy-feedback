@@ -44,15 +44,15 @@ def init_db():
     conn.close()
 
 
-def add_feedback(disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url):
+def add_feedback(project, disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url):
     conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
-        INSERT INTO feedback (disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        INSERT INTO feedback (project, disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
         RETURNING id
-    """, (disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url))
+    """, (project, disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url))
 
     feedback_id = cursor.fetchone()[0]
 

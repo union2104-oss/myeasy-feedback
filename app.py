@@ -1,4 +1,3 @@
-
 import cloudinary
 import cloudinary.uploader
 import os
@@ -70,7 +69,7 @@ def home():
     fonte = request.args.get("fonte")
 
     query = """
-    SELECT id, disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url
+    SELECT id, project, disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url
     FROM feedback
     WHERE 1=1
     """
@@ -109,13 +108,14 @@ def home():
 
         feedback.append({
             "id": f[0],
-            "disciplina": f[1],
-            "tipo": f[2],
-            "titolo": f[3],
-            "descrizione": f[4],
-            "priorita": f[5],
-            "fonte": f[6],
-            "stato": f[7],
+            "project": f[1],
+            "disciplina": f[2],
+            "tipo": f[3],
+            "titolo": f[4],
+            "descrizione": f[5],
+            "priorita": f[6],
+            "fonte": f[7],
+            "stato": f[8],
             "images": images
         })
 

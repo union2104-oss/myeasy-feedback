@@ -95,7 +95,7 @@ def home():
     fonte = request.args.get("fonte")
 
     query = """
-    SELECT id, project, disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url
+    SELECT id, project, disciplina, tipo, titolo, prompt, result, errore, priorita, fonte, stato, image_url
     FROM feedback
     WHERE 1=1
     """
@@ -138,10 +138,12 @@ def home():
             "disciplina": f[2],
             "tipo": f[3],
             "titolo": f[4],
-            "descrizione": f[5],
-            "priorita": f[6],
-            "fonte": f[7],
-            "stato": f[8],
+            "prompt": f[5],
+            "result": f[6],
+            "errore": f[7],
+            "priorita": f[8],
+            "fonte": f[9],
+            "stato": f[10],
             "images": images
         })
 

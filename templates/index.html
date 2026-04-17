@@ -230,7 +230,14 @@
 
                 <hr>
 
-                <p style="white-space: pre-line;">{{ f["descrizione"] }}</p>
+                    <p><b>Prompt:</b></p>
+                    <p style="white-space: pre-line;">{{ f["prompt"] }}</p>
+
+                    <p><b>Result:</b></p>
+                    <p style="white-space: pre-line;">{{ f["result"] }}</p>
+
+                    <p><b>What is wrong:</b></p>
+                    <p style="white-space: pre-line;">{{ f["errore"] }}</p>
 
                 {% for img in f["images"] %}
                     <img src="{{ img }}"

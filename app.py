@@ -43,7 +43,9 @@ def home():
         project = request.form["project"]
         tipo = request.form["tipo"]
         titolo = request.form["titolo"]
-        descrizione = request.form["descrizione"]
+        prompt = request.form["prompt"]
+        result = request.form["result"]
+        errore = request.form["errore"]
         priorita = request.form["priorita"]
         fonte = session["user_email"]
         stato = request.form["stato"]
@@ -64,7 +66,9 @@ def home():
             disciplina,
             tipo,
             titolo,
-            descrizione,
+            prompt,
+            result,
+            errore,
             priorita,
             fonte,
             stato,
@@ -155,7 +159,9 @@ def edit(feedback_id):
         disciplina = request.form["disciplina"]
         tipo = request.form["tipo"]
         titolo = request.form["titolo"]
-        descrizione = request.form["descrizione"]
+        prompt = request.form["prompt"]
+        result = request.form["result"]
+        errore = request.form["errore"]
         priorita = request.form["priorita"]
         fonte = session["user_email"]
         stato = request.form["stato"]

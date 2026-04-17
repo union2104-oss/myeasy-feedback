@@ -13,23 +13,24 @@ def init_db():
     cursor = conn.cursor()
 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS feedback (
+    DROP TABLE IF EXISTS feedback CASCADE
+    """)
+
+    cursor.execute("""
+    CREATE TABLE feedback (
         id SERIAL PRIMARY KEY,
         project TEXT,
         disciplina TEXT,
         tipo TEXT,
         titolo TEXT,
-        descrizione TEXT,
+        prompt TEXT,
+        result TEXT,
+        errore TEXT,
         priorita TEXT,
         fonte TEXT,
         stato TEXT,
         image_url TEXT
     )
-    """)
-
-    cursor.execute("""
-    ALTER TABLE feedback
-    ADD COLUMN IF NOT EXISTS project TEXT
     """)
 
     cursor.execute("""

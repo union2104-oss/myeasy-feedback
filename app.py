@@ -58,8 +58,8 @@ def home():
         for file in files:
             print("FILES:", files)
             if file and file.filename != "":
-                result = cloudinary.uploader.upload(file)
-                image_urls.append(result["secure_url"])
+                upload_result = cloudinary.uploader.upload(file)
+                image_urls.append(upload_result["secure_url"])
 
         feedback_id = add_feedback(
             project,
@@ -187,14 +187,16 @@ def edit(feedback_id):
         #update completo
         cursor.execute("""
             UPDATE feedback
-            SET project=%s, disciplina=%s, tipo=%s, titolo=%s, descrizione=%s, priorita=%s, fonte=%s, stato=%s, image_url=%s
+            SET project=%s, disciplina=%s, tipo=%s, titolo=%s, prompt=%s, result=%s, errore=%s, priorita=%s, fonte=%s, stato=%s, image_url=%s
             WHERE id=%s
         """, (
                 project,
                 disciplina,
                 tipo,
                 titolo,
-                descrizione,
+                prompt,
+                result,
+                errore,
                 priorita,
                 fonte,
                 stato,
@@ -229,7 +231,7 @@ def edit(feedback_id):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT id, project, disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url
+        SELECT id, project, disciplina, tipo, titolo, prompt, result, errore, priorita, fonte, stato, image_url
         FROM feedback
         WHERE id = %s
     """, (feedback_id,))
@@ -242,10 +244,12 @@ def edit(feedback_id):
         "disciplina": f[2],
         "tipo": f[3],
         "titolo": f[4],
-        "descrizione": f[5],
-        "priorita": f[6],
-        "fonte": f[7],
-        "stato": f[8]
+        "prompt": f[5],
+        "result": f[6],
+        "errore": f[7],
+        "priorita": f[8],
+        "fonte": f[9],
+        "stato": f[10]
     }
 
     conn.close()

@@ -57,8 +57,18 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Description</label>
-                <textarea name="descrizione" class="form-control" rows="5">{{ feedback['descrizione'] }}</textarea>
+                <label class="form-label">Prompt</label>
+                <textarea name="prompt" class="form-control" rows="3">{{ feedback['prompt'] }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Result</label>
+                <textarea name="result" class="form-control" rows="3">{{ feedback['result'] }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">What is wrong</label>
+                <textarea name="errore" class="form-control" rows="4">{{ feedback['errore'] }}</textarea>
             </div>
 
             <div class="mb-3">
@@ -72,7 +82,8 @@
 
             <div class="mb-3">
                 <label class="form-label">Source</label>
-                <input type="text" name="fonte" class="form-control" value="{{ feedback['fonte'] }}">
+                <input type="text" class="form-control" value="{{ feedback['fonte'] }}" disabled>
+                <input type="hidden" name="fonte" value="{{ feedback['fonte'] }}">
             </div>
 
             <div class="mb-3">

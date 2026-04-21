@@ -13,11 +13,7 @@ def init_db():
     cursor = conn.cursor()
 
     cursor.execute("""
-    DROP TABLE IF EXISTS feedback CASCADE
-    """)
-
-    cursor.execute("""
-    CREATE TABLE feedback (
+     CREATE TABLE IF NOT EXISTS feedback (
         id SERIAL PRIMARY KEY,
         project TEXT,
         disciplina TEXT,
@@ -63,22 +59,6 @@ def add_feedback(project, disciplina, tipo, titolo, prompt, result, errore, prio
     return feedback_id
 
 
-def get_all_feedback():
-    conn = get_connection()
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        SELECT id, disciplina, tipo, titolo, descrizione, priorita, fonte, stato, image_url
-        FROM feedback
-        ORDER BY id DESC
-    """)
-
-    rows = cursor.fetchall()
-
-    conn.close()
-    return rows
-
-
 def delete_feedback(feedback_id):
     conn = get_connection()
     cursor = conn.cursor()
@@ -103,5 +83,5 @@ def get_images_for_feedback(feedback_id):
 
     conn.close()
 
-    # ritorna lista semplice di URL
+    #ritorna lista semplice di URL
     return [row[0] for row in rows]

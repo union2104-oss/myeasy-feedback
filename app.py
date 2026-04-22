@@ -56,10 +56,11 @@ def home():
         image_urls = []
 
         for file in files:
-            print("FILES:", files)
             if file and file.filename != "":
                 upload_result = cloudinary.uploader.upload(file)
                 image_urls.append(upload_result["secure_url"])
+
+        print("IMAGE URLS:", image_urls)
 
         feedback_id = add_feedback(
             project,
@@ -74,6 +75,8 @@ def home():
             stato,
             None
         )
+
+        print("FEEDBACK ID:", feedback_id)
 
         conn = get_connection()
         cursor = conn.cursor()

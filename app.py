@@ -174,6 +174,8 @@ def edit(feedback_id):
         priorita = request.form["priorita"]
         fonte = session["user_email"]
         stato = request.form["stato"]
+        error_type = request.form["error_type"]
+        root_cause = request.form["root_cause"]
 
         files = request.files.getlist("image")
         remove_image = request.form.get("remove_image")
@@ -194,7 +196,7 @@ def edit(feedback_id):
         #update completo
         cursor.execute("""
             UPDATE feedback
-            SET project=%s, disciplina=%s, tipo=%s, titolo=%s, prompt=%s, result=%s, errore=%s, priorita=%s, fonte=%s, stato=%s, image_url=%s
+            SET project=%s, disciplina=%s, tipo=%s, titolo=%s, prompt=%s, result=%s, errore=%s, priorita=%s, fonte=%s, stato=%s, image_url=%s, error_type=%s, root_cause=%s
             WHERE id=%s
         """, (
                 project,
@@ -208,6 +210,8 @@ def edit(feedback_id):
                 fonte,
                 stato,
                 image_url,
+                error_type,
+                root_cause,
                 feedback_id
             ))
 
@@ -238,7 +242,7 @@ def edit(feedback_id):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT id, project, disciplina, tipo, titolo, prompt, result, errore, priorita, fonte, stato, image_url
+        SELECT id, project, disciplina, tipo, titolo, prompt, result, errore, priorita, fonte, stato, image_url, error_type, root_cause
         FROM feedback
         WHERE id = %s
     """, (feedback_id,))
@@ -256,7 +260,9 @@ def edit(feedback_id):
         "errore": f[7],
         "priorita": f[8],
         "fonte": f[9],
-        "stato": f[10]
+        "stato": f[10],
+        "error_type": f[11],
+        "root_cause": f[12]
     }
 
     conn.close()

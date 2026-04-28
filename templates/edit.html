@@ -72,6 +72,26 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label">Error Type</label>
+                <select name="error_type" class="form-select" required>
+                    <option value="Business logic error" {% if feedback["error_type"] == "Business logic error" %}selected{% endif %}>Business logic error</option>
+                    <option value="Filtering issue" {% if feedback["error_type"] == "Filtering issue" %}selected{% endif %}>Filtering issue</option>
+                    <option value="Semantic ambiguity" {% if feedback["error_type"] == "Semantic ambiguity" %}selected{% endif %}>Semantic ambiguity</option>
+                    <option value="Missing context" {% if feedback["error_type"] == "Missing context" %}selected{% endif %}>Missing context</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Root Cause</label>
+                <select name="root_cause" class="form-select" required>
+                    <option value="Static logic" {% if feedback["root_cause"] == "Static logic" %}selected{% endif %}>Static logic</option>
+                    <option value="Missing filters" {% if feedback["root_cause"] == "Missing filters" %}selected{% endif %}>Missing filters</option>
+                    <option value="Ambiguous definition" {% if feedback["root_cause"] == "Ambiguous definition" %}selected{% endif %}>Ambiguous definition</option>
+                    <option value="Lack of business rules" {% if feedback["root_cause"] == "Lack of business rules" %}selected{% endif %}>Lack of business rules</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">Priority</label>
                 <select name="priorita" class="form-select">
                     <option value="Alta" {% if feedback["priorita"] == 'Alta' %}selected{% endif %}>High</option>

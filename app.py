@@ -49,6 +49,8 @@ def home():
         priorita = request.form["priorita"]
         fonte = session["user_email"]
         stato = request.form["stato"]
+        error_type = request.form["error_type"]
+        root_cause = request.form["root_cause"]
 
         files = request.files.getlist("image")
         print("FILES:", files)
@@ -73,7 +75,9 @@ def home():
             priorita,
             fonte,
             stato,
-            None
+            None,
+            error_type,
+            root_cause
         )
 
         print("FEEDBACK ID:", feedback_id)

@@ -82,6 +82,28 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label">Error Type</label>
+                <select name="error_type" class="form-select" required>
+                    <option value="">Select error type</option>
+                    <option value="Business logic error">Business logic error</option>
+                    <option value="Filtering issue">Filtering issue</option>
+                    <option value="Semantic ambiguity">Semantic ambiguity</option>
+                    <option value="Missing context">Missing context</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Root Cause</label>
+                <select name="root_cause" class="form-select" required>
+                    <option value="">Select root cause</option>
+                    <option value="Static logic">Static logic</option>
+                    <option value="Missing filters">Missing filters</option>
+                    <option value="Ambiguous definition">Ambiguous definition</option>
+                    <option value="Lack of business rules">Lack of business rules</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">Priority</label>
                 <select name="priorita" class="form-select">
                     <option value="Alta">High</option>

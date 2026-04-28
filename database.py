@@ -30,6 +30,16 @@ def init_db():
     """)
 
     cursor.execute("""
+        ALTER TABLE feedback
+        ADD COLUMN IF NOT EXISTS error_type TEXT
+    """)
+
+    cursor.execute("""
+        ALTER TABLE feedback
+        ADD COLUMN IF NOT EXISTS root_cause TEXT
+    """)
+
+    cursor.execute("""
     CREATE TABLE IF NOT EXISTS feedback_images (
         id SERIAL PRIMARY KEY,
         feedback_id INTEGER REFERENCES feedback(id) ON DELETE CASCADE,
@@ -41,15 +51,15 @@ def init_db():
     conn.close()
 
 
-def add_feedback(project, disciplina, tipo, titolo, prompt, result, errore, priorita, fonte, stato, image_url):
+def add_feedback(project, disciplina, tipo, titolo, prompt, result, errore, priorita, fonte, stato, image_url, error_type, root_cause):
     conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
-        INSERT INTO feedback (project, disciplina, tipo, titolo, prompt, result, errore, priorita, fonte, stato, image_url)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        INSERT INTO feedback (project, disciplina, tipo, titolo, prompt, result, errore, priorita, fonte, stato, image_url, error_type, root_cause)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         RETURNING id
-    """, (project, disciplina, tipo, titolo, prompt, result, errore, priorita, fonte, stato, image_url))
+    """, (project, disciplina, tipo, titolo, prompt, result, errore, priorita, fonte, stato, image_url, error_type, root_cause))
 
     feedback_id = cursor.fetchone()[0]
 

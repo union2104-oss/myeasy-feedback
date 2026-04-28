@@ -102,7 +102,7 @@ def home():
     fonte = request.args.get("fonte")
 
     query = """
-    SELECT id, project, disciplina, tipo, titolo, prompt, result, errore, priorita, fonte, stato, image_url
+    SELECT id, project, disciplina, tipo, titolo, prompt, result, errore, priorita, fonte, stato, image_url, error_type, root_cause
     FROM feedback
     WHERE 1=1
     """
@@ -151,7 +151,9 @@ def home():
             "priorita": f[8],
             "fonte": f[9],
             "stato": f[10],
-            "images": images
+            "images": images,
+            "error_type": f[12],
+            "root_cause": f[13]
         })
 
     return render_template("index.html", feedback=feedback)
